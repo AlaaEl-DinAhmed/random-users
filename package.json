@@ -7,14 +7,10 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "postinstall": "git config core.hooksPath ./git-hooks"
   },
   "private": true,
-  "husky": {
-    "hooks": {
-      "pre-commit": "ng lint"
-    }
-  },
   "dependencies": {
     "@angular/animations": "~13.1.0",
     "@angular/common": "~13.1.0",
