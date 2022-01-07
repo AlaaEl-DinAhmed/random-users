@@ -1,7 +1,0 @@
-#!/bin/sh
-
-# Check for unstaged files
-if file in $(git diff --cached --name-only | grep -E '\.ts|.html$')
-then 
-    npx ng lint && ng test
-fi
