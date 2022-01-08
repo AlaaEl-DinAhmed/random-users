@@ -1,0 +1,12 @@
+<app-checkbox
+  [formControlName]="nationalitiesFormControl"
+  [values]="nationalities"
+  label="Nationality"
+  (emitFilterValues)="getValues($event)"
+></app-checkbox>
+<app-checkbox
+  [formControlName]="genderFormControl"
+  [values]="gender"
+  label="Gender"
+  (emitFilterValues)="getValues($event)"
+></app-checkbox>
