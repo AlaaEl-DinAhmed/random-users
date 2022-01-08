@@ -1,8 +1,15 @@
+:root {
+  --background-color: #f6f6f7;
+  --main-spacing: 1.34375em;
+  --row-height: 68px;
+  --font-size-cell-heading: 1rem;
+}
 html,
 body {
   height: 100%;
 }
 body {
   margin: 0;
+  padding: 3rem;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
 }

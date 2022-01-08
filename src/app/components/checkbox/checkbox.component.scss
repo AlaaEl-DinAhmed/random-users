@@ -1,0 +1,9 @@
+:host(.p-right) {
+  padding-right: 2rem;
+}
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    padding-top: var(--main-spacing);
+  }
+}

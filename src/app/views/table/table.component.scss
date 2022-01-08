@@ -1,0 +1,18 @@
+.mat-table {
+  width: 100%;
+  margin-top: 1.5rem;
+}
+
+tr.mat-row {
+  height: var(--row-height);
+}
+
+th.mat-header-cell {
+  font-size: var(--font-size-cell-heading);
+}
+
+img {
+  border-radius: 60%;
+  display: block;
+  height: 100%;
+}
