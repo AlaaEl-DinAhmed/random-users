@@ -8,4 +8,6 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 })
 export class FilterComponent {
   constructor() {}
+
+  exportFileAsCsv(): void {}
 }

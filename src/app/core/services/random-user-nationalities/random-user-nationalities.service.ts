@@ -14,9 +14,9 @@ export class RandomUserNationalitiesService {
 
   getNationalities(gender = '', nat = ''): Observable<any> {
     return this.http
-      .get(environment.apiUrl, {
+      .get(environment.baseUrl, {
         params: {
-          results: 10,
+          results: 500,
           gender,
           nat,
         },

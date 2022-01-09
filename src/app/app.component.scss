@@ -1,7 +1,18 @@
+@import 'assets/styles/responsive.mixin';
+
 h1 {
   margin-top: 0;
 }
 .filter-container {
   background-color: var(--background-color);
   padding-left: var(--main-spacing);
+}
+.table-container {
+  margin-top: var(--main-spacing);
+}
+
+@include mobile {
+  .filter-container {
+    padding-right: var(--main-spacing);
+  }
 }

@@ -1,17 +1,21 @@
-.mat-table {
+cdk-virtual-scroll-viewport {
+  height: 70vh;
+}
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
   width: 100%;
-  margin-top: 1.5rem;
 }
 
-tr.mat-row {
-  height: var(--row-height);
+td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: var(--main-spacing);
 }
 
-th.mat-header-cell {
-  font-size: var(--font-size-cell-heading);
-}
-
-img {
+.avatar {
   border-radius: 60%;
   display: block;
   height: 100%;

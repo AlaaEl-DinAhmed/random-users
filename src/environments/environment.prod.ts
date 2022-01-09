@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://randomuser.me/api/',
+  baseUrl: 'https://randomuser.me/api/',
 };

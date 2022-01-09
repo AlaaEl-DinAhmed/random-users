@@ -1,62 +1,31 @@
-<app-spinner *ngIf="!dataSource.length"></app-spinner>
-<table
-  *ngIf="dataSource.length"
-  mat-table
-  [dataSource]="dataSource"
-  class="mat-elevation-z8"
->
-  <!-- Picture Column -->
-  <ng-container matColumnDef="picture">
-    <th mat-header-cell *matHeaderCellDef>Picture</th>
-    <td mat-cell *matCellDef="let element">
-      <img [src]="element.picture" [alt]="element.name" />
-    </td>
-  </ng-container>
-
-  <!-- Name Column -->
-  <ng-container matColumnDef="name">
-    <th mat-header-cell *matHeaderCellDef>Name</th>
-    <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-  </ng-container>
-
-  <!-- Gender Column -->
-  <ng-container matColumnDef="gender">
-    <th mat-header-cell *matHeaderCellDef>Gender</th>
-    <td mat-cell *matCellDef="let element">{{ element.gender | titlecase }}</td>
-  </ng-container>
-
-  <!-- Location Column -->
-  <ng-container matColumnDef="location">
-    <th mat-header-cell *matHeaderCellDef>Location</th>
-    <td mat-cell *matCellDef="let element">{{ element.location }}</td>
-  </ng-container>
-
-  <!-- Email Column -->
-  <ng-container matColumnDef="email">
-    <th mat-header-cell *matHeaderCellDef>Email</th>
-    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
-  </ng-container>
-
-  <!-- Current Age Column -->
-  <ng-container matColumnDef="currentAge">
-    <th mat-header-cell *matHeaderCellDef>Current Age</th>
-    <td mat-cell *matCellDef="let element">{{ element.currentAge }}</td>
-  </ng-container>
-
-  <!-- Registration Seniority Column -->
-  <ng-container matColumnDef="registrationSeniority">
-    <th mat-header-cell *matHeaderCellDef>Registration Seniority</th>
-    <td mat-cell *matCellDef="let element">
-      {{ element.registrationSeniority }}
-    </td>
-  </ng-container>
-
-  <!-- Phone Number Column -->
-  <ng-container matColumnDef="phoneNumber">
-    <th mat-header-cell *matHeaderCellDef>Phone Number</th>
-    <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
-  </ng-container>
-
-  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-</table>
+<app-spinner *ngIf="!users.length"></app-spinner>
+<cdk-virtual-scroll-viewport *ngIf="users.length" itemSize="50">
+  <table>
+    <thead>
+      <tr>
+        <th>Picture</th>
+        <th>Gender</th>
+        <th>Name</th>
+        <th>Location</th>
+        <th>Email</th>
+        <th>Current Age</th>
+        <th>Registration Seniority</th>
+        <th>Phone Number</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *cdkVirtualFor="let user of users">
+        <td>
+          <img class="avatar" [src]="user.picture" [alt]="user.name" />
+        </td>
+        <td>{{ user.name }}</td>
+        <td>{{ user.gender | titlecase }}</td>
+        <td>{{ user.location }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.currentAge }}</td>
+        <td>{{ user.registrationSeniority }}</td>
+        <td>{{ user.phoneNumber }}</td>
+      </tr>
+    </tbody>
+  </table>
+</cdk-virtual-scroll-viewport>

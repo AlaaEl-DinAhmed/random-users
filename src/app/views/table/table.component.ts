@@ -16,18 +16,9 @@ import { combineLatest, debounceTime, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnDestroy {
-  displayedColumns: string[] = [
-    'picture',
-    'name',
-    'gender',
-    'location',
-    'email',
-    'currentAge',
-    'registrationSeniority',
-    'phoneNumber',
-  ];
-  dataSource: User[] = [];
+  users: User[] = [];
   randomUserSub!: Subscription;
+
   constructor(
     private ref: ChangeDetectorRef,
     private randomUsersService: RandomUserNationalitiesService
@@ -54,7 +45,7 @@ export class TableComponent implements OnInit, OnDestroy {
     this.randomUsersService
       .getNationalities(genderFilterValues, natFilterValues)
       .subscribe((users: User[]) => {
-        this.dataSource = users;
+        this.users = users;
         this.ref.markForCheck();
       });
   }
