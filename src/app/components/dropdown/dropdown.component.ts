@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GENDERS } from '@constants/gender';
 import { NATIONALITIES } from '@constants/nationalities';
+import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
 
 @Component({
   selector: 'app-dropdown',
@@ -15,9 +16,15 @@ export class DropdownComponent {
   nationalitiesFormControl = new FormControl();
   genderFormControl = new FormControl();
 
-  constructor() {}
+  constructor(
+    private randomUserNationalitiesService: RandomUserNationalitiesService
+  ) {}
 
-  getValues(event: Event) {
-    console.log(event);
+  getGenderFilterValues(event: any): void {
+    this.randomUserNationalitiesService.genderFilter.next(event.join(','));
+  }
+
+  getNatFilterValues(event: any): void {
+    this.randomUserNationalitiesService.natFilter.next(event.join(','));
   }
 }

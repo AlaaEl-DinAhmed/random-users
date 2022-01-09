@@ -2,12 +2,12 @@
   [formControlName]="nationalitiesFormControl"
   [values]="nationalities"
   label="Nationality"
-  (emitFilterValues)="getValues($event)"
+  (emitFilterValues)="getNatFilterValues($event)"
   class="p-right"
 ></app-checkbox>
 <app-checkbox
   [formControlName]="genderFormControl"
   [values]="gender"
   label="Gender"
-  (emitFilterValues)="getValues($event)"
+  (emitFilterValues)="getGenderFilterValues($event)"
 ></app-checkbox>

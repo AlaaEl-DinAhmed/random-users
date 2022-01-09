@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { User } from '@interfaces/user';
 import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
-import { Subscription } from 'rxjs';
+import { combineLatest, debounceTime, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-table',
@@ -34,17 +34,28 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.getRandomUsers();
+    combineLatest([
+      this.randomUsersService.genderFilter$,
+      this.randomUsersService.natFilter$,
+    ])
+      .pipe(debounceTime(500))
+      .subscribe((filterValues: [string, string]) => {
+        const gender = filterValues[0].toLowerCase();
+        const nat = filterValues[1];
+        this.getRandomUsers(gender, nat);
+      });
   }
 
   ngOnDestroy(): void {
     this.randomUserSub?.unsubscribe();
   }
 
-  getRandomUsers(): void {
-    this.randomUsersService.getNationalities().subscribe((users: User[]) => {
-      this.dataSource = users;
-      this.ref.markForCheck();
-    });
+  getRandomUsers(genderFilterValues?: string, natFilterValues?: string): void {
+    this.randomUsersService
+      .getNationalities(genderFilterValues, natFilterValues)
+      .subscribe((users: User[]) => {
+        this.dataSource = users;
+        this.ref.markForCheck();
+      });
   }
 }
