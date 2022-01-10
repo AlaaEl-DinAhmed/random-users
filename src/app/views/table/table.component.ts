@@ -25,6 +25,14 @@ export class TableComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getRandomUsers();
+  }
+
+  ngOnDestroy(): void {
+    this.randomUserSub?.unsubscribe();
+  }
+
+  getRandomUsers(): void {
     combineLatest([
       this.randomUsersService.genderFilter$,
       this.randomUsersService.natFilter$,
@@ -33,20 +41,21 @@ export class TableComponent implements OnInit, OnDestroy {
       .subscribe((filterValues: [string, string]) => {
         const gender = filterValues[0].toLowerCase();
         const nat = filterValues[1];
-        this.getRandomUsers(gender, nat);
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.randomUserSub?.unsubscribe();
-  }
-
-  getRandomUsers(genderFilterValues?: string, natFilterValues?: string): void {
-    this.randomUsersService
-      .getNationalities(genderFilterValues, natFilterValues)
-      .subscribe((users: User[]) => {
-        this.users = users;
-        this.ref.markForCheck();
+        this.randomUsersService
+          .getNationalities(gender, nat)
+          .subscribe((response: any) => {
+            this.users = response.results.map((user: User) => ({
+              picture: user.picture.thumbnail,
+              name: user.name.first,
+              gender: user.gender,
+              location: user.location.country,
+              email: user.email,
+              currentAge: user.registered.age,
+              registrationSeniority: user.registered.date,
+              phoneNumber: user.phone,
+            }));
+            this.ref.markForCheck();
+          });
       });
   }
 }
