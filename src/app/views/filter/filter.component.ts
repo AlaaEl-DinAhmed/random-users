@@ -12,7 +12,7 @@ import { RandomUserNationalitiesService } from '@services/random-user-nationalit
 })
 export class FilterComponent {
   nationalities = NATIONALITIES;
-  gender = GENDERS;
+  genders = GENDERS;
   nationalitiesFormControl = new FormControl();
   genderFormControl = new FormControl();
 
