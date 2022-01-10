@@ -1,13 +1,12 @@
-<app-checkbox
-  [formControlName]="nationalitiesFormControl"
-  [values]="nationalities"
-  label="Nationality"
-  (emitFilterValues)="getNatFilterValues($event)"
-  class="p-right"
-></app-checkbox>
-<app-checkbox
-  [formControlName]="genderFormControl"
-  [values]="gender"
-  label="Gender"
-  (emitFilterValues)="getGenderFilterValues($event)"
-></app-checkbox>
+<mat-form-field appearance="fill">
+  <mat-label>Filter By {{ label }} </mat-label>
+  <mat-select
+    multiple
+    [formControl]="formControlName"
+    (selectionChange)="emitFormControlValue()"
+  >
+    <mat-option *ngFor="let value of values" [value]="value" [id]="value">
+      <mat-label> {{ value }} </mat-label>
+    </mat-option>
+  </mat-select>
+</mat-form-field>

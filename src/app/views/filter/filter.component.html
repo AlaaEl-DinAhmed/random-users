@@ -1,1 +1,13 @@
-<app-dropdown></app-dropdown>
+<app-dropdown
+  [formControlName]="nationalitiesFormControl"
+  [values]="nationalities"
+  [label]="'Nationality'"
+  (emitFilterValues)="getNatFilterValues($event)"
+  class="p-right"
+></app-dropdown>
+<app-dropdown
+  [formControlName]="genderFormControl"
+  [values]="gender"
+  [label]="'Gender'"
+  (emitFilterValues)="getGenderFilterValues($event)"
+></app-dropdown>

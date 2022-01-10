@@ -1,0 +1,17 @@
+@import 'assets/styles/responsive.mixin';
+
+:host(.p-right) {
+  padding-right: 2rem;
+}
+
+::ng-deep {
+  .mat-form-field-wrapper {
+    padding-top: var(--main-spacing);
+  }
+}
+
+@include mobile {
+  .mat-form-field {
+    width: 100%;
+  }
+}

@@ -1,12 +1,13 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { CheckboxComponentModule } from '@components/checkbox/checkbox.module';
-import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { DropdownComponent } from './dropdown.component';
 
 @NgModule({
-  imports: [CheckboxComponentModule],
+  imports: [CommonModule, ReactiveFormsModule, MatSelectModule],
   exports: [DropdownComponent],
   declarations: [DropdownComponent],
-  providers: [RandomUserNationalitiesService],
+  providers: [],
 })
 export class DropDownComponentModule {}

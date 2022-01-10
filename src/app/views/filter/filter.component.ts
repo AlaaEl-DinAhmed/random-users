@@ -1,4 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { GENDERS } from '@constants/gender';
+import { NATIONALITIES } from '@constants/nationalities';
+import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
 
 @Component({
   selector: 'app-filter',
@@ -7,7 +11,20 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FilterComponent {
-  constructor() {}
+  nationalities = NATIONALITIES;
+  gender = GENDERS;
+  nationalitiesFormControl = new FormControl();
+  genderFormControl = new FormControl();
 
-  exportFileAsCsv(): void {}
+  constructor(
+    private randomUserNationalitiesService: RandomUserNationalitiesService
+  ) {}
+
+  getGenderFilterValues(event: any): void {
+    this.randomUserNationalitiesService.genderFilter.next(event.join(','));
+  }
+
+  getNatFilterValues(event: any): void {
+    this.randomUserNationalitiesService.natFilter.next(event.join(','));
+  }
 }
