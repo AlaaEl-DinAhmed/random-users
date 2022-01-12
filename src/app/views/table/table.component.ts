@@ -5,7 +5,8 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { User } from '@interfaces/user';
+import { IRandomUsersResponse } from '@interfaces/random-users-response';
+import { IMappedUser, IUser } from '@interfaces/user';
 import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
 import { combineLatest, debounceTime, Subscription } from 'rxjs';
 
@@ -16,7 +17,7 @@ import { combineLatest, debounceTime, Subscription } from 'rxjs';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TableComponent implements OnInit, OnDestroy {
-  users: User[] = [];
+  users: IMappedUser[] = [];
   randomUserSub!: Subscription;
 
   constructor(
@@ -43,16 +44,16 @@ export class TableComponent implements OnInit, OnDestroy {
         const nat = filterValues[1];
         this.randomUsersService
           .getNationalities(gender, nat)
-          .subscribe((response: any) => {
-            this.users = response.results.map((user: User) => ({
-              picture: user.picture.thumbnail,
-              name: user.name.first,
+          .subscribe((response: IRandomUsersResponse) => {
+            this.users = response.results.map((user: IUser) => ({
+              name: user.name,
               gender: user.gender,
               location: user.location.country,
+              dob: user.dob.age,
               email: user.email,
-              currentAge: user.registered.age,
-              registrationSeniority: user.registered.date,
-              phoneNumber: user.phone,
+              registered: user.registered.date,
+              phone: user.phone,
+              picture: user.picture.thumbnail,
             }));
             this.ref.markForCheck();
           });

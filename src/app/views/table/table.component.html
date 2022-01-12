@@ -4,8 +4,8 @@
     <thead>
       <tr>
         <th>Picture</th>
-        <th>Gender</th>
         <th>Name</th>
+        <th>Gender</th>
         <th>Location</th>
         <th>Email</th>
         <th>Current Age</th>
@@ -18,13 +18,13 @@
         <td>
           <img class="avatar" [src]="user.picture" [alt]="user.name" />
         </td>
-        <td>{{ user.name }}</td>
+        <td>{{ user.name | userName }}</td>
         <td>{{ user.gender | titlecase }}</td>
         <td>{{ user.location }}</td>
         <td>{{ user.email }}</td>
-        <td>{{ user.currentAge }}</td>
-        <td>{{ user.registrationSeniority }}</td>
-        <td>{{ user.phoneNumber }}</td>
+        <td>{{ user.dob }}</td>
+        <td>{{ user.registered }}</td>
+        <td>{{ user.phone }}</td>
       </tr>
     </tbody>
   </table>
