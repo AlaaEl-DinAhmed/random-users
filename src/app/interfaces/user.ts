@@ -18,7 +18,7 @@ interface IMappedUser {
   picture: string;
   location: string;
   dob: number;
-  registered: Date;
+  registered: string;
   email: string;
   gender: string;
   phone: string;

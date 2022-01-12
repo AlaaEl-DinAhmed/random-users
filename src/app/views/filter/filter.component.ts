@@ -20,11 +20,11 @@ export class FilterComponent {
     private randomUserNationalitiesService: RandomUserNationalitiesService
   ) {}
 
-  getGenderFilterValues(event: any): void {
+  getGenderFilterValues(event: string[]): void {
     this.randomUserNationalitiesService.genderFilter.next(event.join(','));
   }
 
-  getNatFilterValues(event: any): void {
+  getNatFilterValues(event: string[]): void {
     this.randomUserNationalitiesService.natFilter.next(event.join(','));
   }
 }

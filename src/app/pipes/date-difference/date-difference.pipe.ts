@@ -4,7 +4,7 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'dateDifference',
 })
 export class DateDifferencePipe implements PipeTransform {
-  transform(value: Date): unknown {
+  transform(value: string): unknown {
     const currentDate = new Date().getFullYear();
     const date = new Date(value).getFullYear();
 
