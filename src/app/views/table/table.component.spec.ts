@@ -1,26 +1,34 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SpinnerComponentModule } from '@components/spinner/spinner.module';
+import { RANDOM_USERS } from '@mock/random-users';
 import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
-import { Subscription } from 'rxjs';
+import { of } from 'rxjs';
 import { TableComponent } from './table.component';
 
 describe('TableComponent', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
-  let randomUserNationalitiesService: RandomUserNationalitiesService;
+  let randomUserNationalitiesService = jasmine.createSpyObj(
+    'randomUserNationalitiesService',
+    {
+      users$: of([RANDOM_USERS]),
+    },
+    ['users$']
+  );
 
   beforeEach(
     waitForAsync(() => {
       {
         TestBed.configureTestingModule({
-          imports: [HttpClientTestingModule, SpinnerComponentModule],
+          imports: [SpinnerComponentModule],
           declarations: [TableComponent],
-          providers: [RandomUserNationalitiesService],
+          providers: [
+            {
+              provide: RandomUserNationalitiesService,
+              useValue: randomUserNationalitiesService,
+            },
+          ],
         }).compileComponents();
-        randomUserNationalitiesService = TestBed.inject(
-          RandomUserNationalitiesService
-        );
       }
     })
   );
@@ -31,24 +39,7 @@ describe('TableComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('should call getRandomUsers on the component creation', () => {
-    const spy = spyOn(component, 'getRandomUsers');
-
-    component.ngOnInit();
-
-    expect(spy).toHaveBeenCalled();
-  });
-
-  it('should remove random User subscription on the component destroyed', () => {
-    component.randomUserSub = new Subscription();
-    const spy = spyOn(component.randomUserSub, 'unsubscribe');
-
-    component.ngOnDestroy();
-
-    expect(spy).toHaveBeenCalled();
   });
 });

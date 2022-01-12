@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { SpinnerComponentModule } from '@components/spinner/spinner.module';
 import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
 import { UserNamePipeModule } from 'app/pipes/user-name/user-name.module';
+import { DateDifferencePipeModule } from './../../pipes/date-difference/date-difference.module';
 import { TableComponent } from './table.component';
 
 @NgModule({
@@ -12,6 +13,7 @@ import { TableComponent } from './table.component';
     ScrollingModule,
     SpinnerComponentModule,
     UserNamePipeModule,
+    DateDifferencePipeModule,
   ],
   exports: [TableComponent],
   declarations: [TableComponent],

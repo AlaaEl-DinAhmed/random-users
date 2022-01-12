@@ -2,7 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { IRandomUsersResponse } from '@interfaces/random-users-response';
 import { environment } from 'environments/environment';
-import { BehaviorSubject, Observable } from 'rxjs';
+import {
+  BehaviorSubject,
+  combineLatest,
+  debounceTime,
+  map,
+  Observable,
+  shareReplay,
+  switchMap,
+} from 'rxjs';
 
 @Injectable()
 export class RandomUserNationalitiesService {
@@ -11,6 +19,32 @@ export class RandomUserNationalitiesService {
 
   natFilter = new BehaviorSubject('');
   natFilter$ = this.natFilter.asObservable();
+
+  users$ = combineLatest([
+    this.genderFilter$.pipe(
+      map((genderFilter: string) => genderFilter.toLowerCase())
+    ),
+    this.natFilter$,
+  ]).pipe(
+    debounceTime(500),
+    switchMap(([gender, nat]) => {
+      return this.getNationalities(gender, nat).pipe(
+        map(({ results }) =>
+          results.map((user) => ({
+            name: user.name,
+            gender: user.gender,
+            location: user.location.country,
+            dob: user.dob.age,
+            email: user.email,
+            registered: user.registered.date,
+            phone: user.phone,
+            picture: user.picture.thumbnail,
+          }))
+        )
+      );
+    }),
+    shareReplay({ bufferSize: 1, refCount: true })
+  );
 
   constructor(private http: HttpClient) {}
 

@@ -1,31 +1,36 @@
-<app-spinner *ngIf="!users.length"></app-spinner>
-<cdk-virtual-scroll-viewport *ngIf="users.length" itemSize="50">
-  <table>
-    <thead>
-      <tr>
-        <th>Picture</th>
-        <th>Name</th>
-        <th>Gender</th>
-        <th>Location</th>
-        <th>Email</th>
-        <th>Current Age</th>
-        <th>Registration Seniority</th>
-        <th>Phone Number</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *cdkVirtualFor="let user of users">
-        <td>
-          <img class="avatar" [src]="user.picture" [alt]="user.name" />
-        </td>
-        <td>{{ user.name | userName }}</td>
-        <td>{{ user.gender | titlecase }}</td>
-        <td>{{ user.location }}</td>
-        <td>{{ user.email }}</td>
-        <td>{{ user.dob }}</td>
-        <td>{{ user.registered }}</td>
-        <td>{{ user.phone }}</td>
-      </tr>
-    </tbody>
-  </table>
-</cdk-virtual-scroll-viewport>
+<ng-container *ngIf="users$ | async as users; else isLoading">
+  <cdk-virtual-scroll-viewport itemSize="50">
+    <table>
+      <thead>
+        <tr>
+          <th>Picture</th>
+          <th>Name</th>
+          <th>Gender</th>
+          <th>Location</th>
+          <th>Email</th>
+          <th>Current Age</th>
+          <th>Registration Seniority</th>
+          <th>Phone Number</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *cdkVirtualFor="let user of users$ | async">
+          <td>
+            <img class="avatar" [src]="user.picture" [alt]="user.name" />
+          </td>
+          <td>{{ user.name | userName }}</td>
+          <td>{{ user.gender | titlecase }}</td>
+          <td>{{ user.location }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.dob }}</td>
+          <td>{{ user.registered | dateDifference }}</td>
+          <td>{{ user.phone }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </cdk-virtual-scroll-viewport>
+</ng-container>
+
+<ng-template #isLoading>
+  <app-spinner></app-spinner>
+</ng-template>

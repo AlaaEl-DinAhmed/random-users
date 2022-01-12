@@ -1,4 +1,7 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormControl } from '@angular/forms';
+import { MatSelectModule } from '@angular/material/select';
 import { DropdownComponent } from './dropdown.component';
 
 describe('dropdownComponent', () => {
@@ -8,6 +11,8 @@ describe('dropdownComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [DropdownComponent],
+      providers: [MatSelectModule],
+      schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
   });
 
@@ -17,7 +22,17 @@ describe('dropdownComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create dropdown component', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should emit dropdown value', () => {
+    component.formControlName = new FormControl();
+    component.formControlName.setValue('male');
+    const spy = spyOn(component.emitValues, 'emit');
+
+    component.change();
+
+    expect(spy).toHaveBeenCalledWith(component.formControlName.value);
   });
 });

@@ -3,7 +3,7 @@
   <mat-select
     multiple
     [formControl]="formControlName"
-    (selectionChange)="emitFormControlValue()"
+    (selectionChange)="change()"
   >
     <mat-option *ngFor="let value of values" [value]="value" [id]="value">
       <mat-label> {{ value }} </mat-label>

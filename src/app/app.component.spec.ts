@@ -1,9 +1,11 @@
 import { TestBed } from '@angular/core/testing';
+import { FilterComponentModule } from '@views/filter/filter.module';
 import { AppComponent } from './app.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
+      imports: [FilterComponentModule],
       declarations: [AppComponent],
     }).compileComponents();
   });

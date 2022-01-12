@@ -18,11 +18,11 @@ export class DropdownComponent {
   @Input() label = '';
   @Input() values = [''];
 
-  @Output() emitFilterValues = new EventEmitter();
+  @Output() emitValues = new EventEmitter();
 
   constructor() {}
 
-  emitFormControlValue(): void {
-    this.emitFilterValues.emit(this.formControlName.value);
+  change(): void {
+    this.emitValues.emit(this.formControlName.value);
   }
 }

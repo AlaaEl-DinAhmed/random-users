@@ -9,6 +9,7 @@
       "@services/*": ["app/core/services/*"],
       "@interfaces/*": ["app/interfaces/*"],
       "@constants/*": ["app/constants/*"],
+      "@mock/*": ["app/mock/*"],
       "@assets/*": ["assets/*"]
     },
     "outDir": "./dist/out-tsc",
