@@ -1,31 +1,25 @@
+import { ScrollingModule } from '@angular/cdk/scrolling';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { SpinnerComponentModule } from '@components/spinner/spinner.module';
-import { RANDOM_USERS } from '@mock/random-users';
-import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
-import { of } from 'rxjs';
+import { RandomUsersService } from '@services/random-users/random-users.service';
 import { TableComponent } from './table.component';
+
+class RandomUserNationalitiesService {}
 
 describe('TableComponent', () => {
   let component: TableComponent;
   let fixture: ComponentFixture<TableComponent>;
-  let randomUserNationalitiesService = jasmine.createSpyObj(
-    'randomUserNationalitiesService',
-    {
-      users$: of([RANDOM_USERS]),
-    },
-    ['users$']
-  );
-
+  let randomUsersService = new RandomUserNationalitiesService();
   beforeEach(
     waitForAsync(() => {
       {
         TestBed.configureTestingModule({
-          imports: [SpinnerComponentModule],
+          imports: [ScrollingModule, SpinnerComponentModule],
           declarations: [TableComponent],
           providers: [
             {
-              provide: RandomUserNationalitiesService,
-              useValue: randomUserNationalitiesService,
+              provide: RandomUsersService,
+              useValue: randomUsersService,
             },
           ],
         }).compileComponents();

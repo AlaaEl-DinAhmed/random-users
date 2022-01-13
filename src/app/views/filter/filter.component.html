@@ -2,12 +2,12 @@
   [formControlName]="nationalitiesFormControl"
   [values]="nationalities"
   [label]="'Nationality'"
-  (emitValues)="getNatFilterValues($event)"
+  (emitValues)="emitNatFilterValues($event)"
   class="p-right"
 ></app-dropdown>
 <app-dropdown
   [formControlName]="genderFormControl"
   [values]="genders"
   [label]="'Gender'"
-  (emitValues)="getGenderFilterValues($event)"
+  (emitValues)="emitGenderFilterValues($event)"
 ></app-dropdown>

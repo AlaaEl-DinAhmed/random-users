@@ -1,25 +1,31 @@
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
+import { RandomUsersService } from '@services/random-users/random-users.service';
+import { BehaviorSubject } from 'rxjs';
 import { FilterComponent } from './filter.component';
+
+class RandomUserNationalitiesService {
+  genderFilter = new BehaviorSubject('');
+  natFilter = new BehaviorSubject('');
+}
 
 describe('FilterComponent', () => {
   let component: FilterComponent;
   let fixture: ComponentFixture<FilterComponent>;
-  let randomUserNationalitiesService: RandomUserNationalitiesService;
+  let randomUsersService = new RandomUserNationalitiesService();
 
   beforeEach(
     waitForAsync(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule],
         declarations: [FilterComponent],
-        providers: [RandomUserNationalitiesService],
+        providers: [
+          {
+            provide: RandomUsersService,
+            useValue: randomUsersService,
+          },
+        ],
         schemas: [NO_ERRORS_SCHEMA],
       }).compileComponents();
-      randomUserNationalitiesService = TestBed.inject(
-        RandomUserNationalitiesService
-      );
     })
   );
 
@@ -29,24 +35,24 @@ describe('FilterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 
   it('should emit gender filter values', () => {
     const filterValue = 'male';
-    const spy = spyOn(randomUserNationalitiesService.genderFilter, 'next');
+    const spy = spyOn(randomUsersService.genderFilter, 'next');
 
-    component.getGenderFilterValues(['male']);
+    component.emitGenderFilterValues([filterValue]);
 
     expect(spy).toHaveBeenCalledWith(filterValue);
   });
 
   it('should emit nationalities filter values', () => {
     const filterValue = 'AU';
-    const spy = spyOn(randomUserNationalitiesService.natFilter, 'next');
+    const spy = spyOn(randomUsersService.natFilter, 'next');
 
-    component.getNatFilterValues(['AU']);
+    component.emitNatFilterValues([filterValue]);
 
     expect(spy).toHaveBeenCalledWith(filterValue);
   });

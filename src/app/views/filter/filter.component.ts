@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { GENDERS } from '@constants/gender';
 import { NATIONALITIES } from '@constants/nationalities';
-import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
+import { RandomUsersService } from '@services/random-users/random-users.service';
 
 @Component({
   selector: 'app-filter',
@@ -16,15 +16,13 @@ export class FilterComponent {
   nationalitiesFormControl = new FormControl();
   genderFormControl = new FormControl();
 
-  constructor(
-    private randomUserNationalitiesService: RandomUserNationalitiesService
-  ) {}
+  constructor(private randomUsersService: RandomUsersService) {}
 
-  getGenderFilterValues(event: string[]): void {
-    this.randomUserNationalitiesService.genderFilter.next(event.join(','));
+  emitGenderFilterValues(event: string[]): void {
+    this.randomUsersService.genderFilter.next(event.join(','));
   }
 
-  getNatFilterValues(event: string[]): void {
-    this.randomUserNationalitiesService.natFilter.next(event.join(','));
+  emitNatFilterValues(event: string[]): void {
+    this.randomUsersService.natFilter.next(event.join(','));
   }
 }

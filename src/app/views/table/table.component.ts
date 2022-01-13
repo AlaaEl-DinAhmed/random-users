@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RandomUserNationalitiesService } from '@services/random-user-nationalities/random-user-nationalities.service';
+import { RandomUsersService } from '@services/random-users/random-users.service';
 
 @Component({
   selector: 'app-table',
@@ -8,5 +8,5 @@ import { RandomUserNationalitiesService } from '@services/random-user-nationalit
 })
 export class TableComponent {
   users$ = this.randomUsersService.users$;
-  constructor(private randomUsersService: RandomUserNationalitiesService) {}
+  constructor(private randomUsersService: RandomUsersService) {}
 }
