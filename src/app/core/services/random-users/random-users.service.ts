@@ -12,7 +12,7 @@ import {
   switchMap,
 } from 'rxjs';
 
-@Injectable({ providedIn: 'root' })
+@Injectable()
 export class RandomUsersService {
   genderFilter = new BehaviorSubject('');
   genderFilter$ = this.genderFilter.asObservable();

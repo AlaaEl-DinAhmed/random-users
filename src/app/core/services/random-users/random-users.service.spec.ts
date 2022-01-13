@@ -6,7 +6,7 @@ import { RandomUsersService } from './random-users.service';
 
 describe('RandomUsersService', () => {
   let httpClientSpy: jasmine.SpyObj<HttpClient>;
-  let service: RandomUsersService;
+  let randomUsersService: RandomUsersService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -14,17 +14,17 @@ describe('RandomUsersService', () => {
       providers: [RandomUsersService],
     });
     httpClientSpy = jasmine.createSpyObj('HttpClient', ['get']);
-    service = new RandomUsersService(httpClientSpy as any);
+    randomUsersService = new RandomUsersService(httpClientSpy);
   });
 
   it('should be created', () => {
-    expect(service).toBeTruthy();
+    expect(randomUsersService).toBeTruthy();
   });
 
   it('Should call get nationalities method', (done: DoneFn) => {
     httpClientSpy.get.and.returnValue(of([]));
 
-    service.getUsers().subscribe(() => done());
+    randomUsersService.getUsers().subscribe(() => done());
 
     expect(httpClientSpy.get.calls.count()).toBe(1);
   });
