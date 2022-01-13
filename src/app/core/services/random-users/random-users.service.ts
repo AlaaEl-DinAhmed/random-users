@@ -24,7 +24,7 @@ export class RandomUsersService {
     this.genderFilter$.pipe(
       map((genderFilter: string) => genderFilter.toLowerCase())
     ),
-    this.natFilter$,
+    this.natFilter$.pipe(map((natFilter: string) => natFilter.toLowerCase())),
   ]).pipe(
     debounceTime(500),
     switchMap(([gender, nat]) => {

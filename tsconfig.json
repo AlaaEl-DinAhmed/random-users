@@ -5,11 +5,12 @@
     "baseUrl": "src",
     "paths": {
       "@components/*": ["app/components/*"],
-      "@views/*": ["app/views/*"],
+      "@constants/*": ["app/constants/*"],
       "@services/*": ["app/core/services/*"],
       "@interfaces/*": ["app/interfaces/*"],
-      "@constants/*": ["app/constants/*"],
       "@mock/*": ["app/mock/*"],
+      "@pipes/*": ["app/pipes/*"],
+      "@views/*": ["app/views/*"],
       "@assets/*": ["assets/*"]
     },
     "outDir": "./dist/out-tsc",
