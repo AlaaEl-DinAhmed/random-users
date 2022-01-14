@@ -2,9 +2,9 @@
 
 ## Development server
 
-Run `docker build -t jumia-task -f Dockerfile .`
+Run `docker build -t random-users -f Dockerfile .`
 
-then `docker run --rm -it -p 4200:4200 jumia-task`
+then `docker run --rm -it -p 4200:4200 random-users`
 
 ## Running unit tests
 
