@@ -28,7 +28,7 @@ export class RandomUsersService {
   ]).pipe(
     debounceTime(500),
     switchMap(([gender, nat]) => {
-      return this.getUsers(gender, nat).pipe(
+      return this.getUsers({ gender, nat }).pipe(
         map(({ results }) =>
           results.map((user) => ({
             name: user.name,
@@ -48,7 +48,7 @@ export class RandomUsersService {
 
   constructor(private http: HttpClient) {}
 
-  getUsers(gender = '', nat = ''): Observable<IRandomUsersResponse> {
+  getUsers({ gender = '', nat = '' }): Observable<IRandomUsersResponse> {
     return this.http.get<IRandomUsersResponse>(environment.baseUrl, {
       params: {
         results: 300,

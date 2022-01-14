@@ -4,16 +4,27 @@ h1 {
   font-weight: 500;
   margin-top: 0;
 }
+
+a[href] {
+  color: #000;
+}
+
 .filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   background-color: var(--background-color);
+  padding-right: var(--main-spacing);
   padding-left: var(--main-spacing);
 }
+
 .table-container {
   margin-top: var(--main-spacing);
 }
 
 @include mobile {
   .filter-container {
-    padding-right: var(--main-spacing);
+    flex-wrap: wrap;
+    padding-bottom: var(--main-spacing);
   }
 }

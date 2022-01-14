@@ -24,7 +24,7 @@ describe('RandomUsersService', () => {
   it('Should call get nationalities method', (done: DoneFn) => {
     httpClientSpy.get.and.returnValue(of([]));
 
-    randomUsersService.getUsers().subscribe(() => done());
+    randomUsersService.getUsers({}).subscribe(() => done());
 
     expect(httpClientSpy.get.calls.count()).toBe(1);
   });

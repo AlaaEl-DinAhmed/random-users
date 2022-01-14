@@ -8,7 +8,6 @@
       "@constants/*": ["app/constants/*"],
       "@services/*": ["app/core/services/*"],
       "@interfaces/*": ["app/interfaces/*"],
-      "@mock/*": ["app/mock/*"],
       "@pipes/*": ["app/pipes/*"],
       "@views/*": ["app/views/*"],
       "@assets/*": ["assets/*"]
