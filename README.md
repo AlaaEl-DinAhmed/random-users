@@ -1,4 +1,4 @@
-# JumiaTask
+# Random Users
 
 ## Development server
 
